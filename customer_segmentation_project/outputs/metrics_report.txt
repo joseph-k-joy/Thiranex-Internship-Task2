@@ -1,0 +1,95 @@
+======================================================================
+  CUSTOMER SEGMENTATION PROJECT — ANALYTICAL REPORT
+  Thiranex Skill Development & Future Tech
+======================================================================
+
+1. DATASET OVERVIEW
+   • Total customers  : 1,000
+   • Total features   : 18
+   • Numeric features : 13  (scaled with StandardScaler)
+   • Categorical      : 4   (gender, location, income_level, category)
+
+2. METHODOLOGY
+   a. Exploratory Data Analysis — distribution plots, bar charts,
+      correlation heatmap.
+   b. Preprocessing — StandardScaler on all numeric features.
+   c. Optimal k selection — Elbow (inertia), Silhouette, Davies-Bouldin,
+      and Calinski-Harabasz scores evaluated for k in [2, 10].
+   d. K-Means Clustering (primary model).
+   e. Agglomerative Hierarchical Clustering (validation / comparison).
+   f. PCA (2-D) for visual validation of cluster separation.
+   g. Segment profiling — mean numeric stats + modal categorical values.
+   h. RFM analysis (Recency, Frequency, Monetary) scatter.
+
+3. OPTIMAL NUMBER OF CLUSTERS:  k = 2
+   • Silhouette Score     : 0.1078
+   • Davies-Bouldin Score : 2.7305
+   • PCA variance (PC1+PC2): 29.5%
+
+4. CLUSTER SELECTION METRICS TABLE
+ k      inertia  silhouette  davies_bouldin  calinski_harabasz
+ 2 11664.079710    0.107824        2.730538         114.303784
+ 3 10579.952532    0.104179        2.462599         114.026378
+ 4 10093.502488    0.088455        2.677144          95.601817
+ 5  9751.759753    0.085045        2.611203          82.856816
+ 6  9443.892213    0.085221        2.432007          74.858354
+ 7  9224.324091    0.081257        2.368701          67.742022
+ 8  9007.908553    0.077233        2.402717          62.804411
+ 9  8802.403379    0.077395        2.504992          59.072194
+10  8615.225257    0.080666        2.202260          55.985213
+
+5. SEGMENT PROFILES
+         segment_size    age  annual_income  spending_score  purchase_frequency  avg_order_value  total_annual_spend  days_since_last_visit  num_categories_bought  loyalty_years  discount_usage_pct  online_purchase_pct  return_rate  support_tickets  gender location income_level preferred_category
+Segment                                                                                                                                                                                                                                                                                                  
+0                 680  44.39       39810.78           19.43               26.71           259.48             6935.82                 178.32                   5.44           4.90                0.52                 0.51         0.15             5.12    Male    Urban       Medium            Grocery
+1                 320  43.68      109395.03           55.27               25.86           230.80             5698.62                 177.05                   5.46           5.06                0.51                 0.48         0.14             5.10  Female    Urban         High              Books
+
+6. BUSINESS INSIGHTS PER SEGMENT
+
+   ── Segment 0 | Budget Shoppers (680 customers, 68.0%) ──
+   Avg income        : $39,811
+   Avg spending score: 19.4/100
+   Avg order value   : $259.48
+   Purchase frequency: 26.7 visits/yr
+   Loyalty (yrs)     : 4.9
+   Online pct        : 51%
+   Top category      : Grocery
+   Top location      : Urban
+
+   ── Segment 1 | Loyal High-Spenders (320 customers, 32.0%) ──
+   Avg income        : $109,395
+   Avg spending score: 55.3/100
+   Avg order value   : $230.80
+   Purchase frequency: 25.9 visits/yr
+   Loyalty (yrs)     : 5.1
+   Online pct        : 48%
+   Top category      : Books
+   Top location      : Urban
+
+7. MARKETING RECOMMENDATIONS
+• High-income, high-spend segments → premium loyalty programs, early-access
+  offers, concierge service.
+• Budget shoppers → flash sales, value bundles, cashback campaigns.
+• Low-recency customers (haven't visited recently) → win-back email/SMS
+  campaigns with exclusive discounts.
+• High online_purchase_pct segments → targeted digital ads, push
+  notifications, and mobile-first UX improvements.
+• Multi-category buyers → cross-sell recommendations and subscription
+  boxes tailored to their purchase history.
+
+8. OUTPUT FILES
+   outputs/customer_data.csv         — Raw generated dataset
+   outputs/segment_profiles.csv      — Per-segment statistics
+   outputs/01_eda_distributions.png  — Feature distributions
+   outputs/02_eda_categorical.png    — Categorical breakdowns
+   outputs/03_correlation_heatmap.png— Correlation matrix
+   outputs/04_cluster_selection.png  — Elbow & metric plots
+   outputs/05_dendrogram.png         — Hierarchical dendrogram
+   outputs/06a_kmeans_pca.png        — K-Means PCA scatter
+   outputs/06b_hierarchical_pca.png  — Hierarchical PCA scatter
+   outputs/07_segment_radar.png      — Segment radar chart
+   outputs/08_segment_boxplots.png   — Metric boxplots by segment
+   outputs/09_category_preferences.png — Category mix by segment
+   outputs/10_rfm_scatter.png        — RFM analysis scatter
+
+======================================================================
